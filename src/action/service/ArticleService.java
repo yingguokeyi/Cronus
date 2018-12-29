@@ -68,6 +68,7 @@ public class ArticleService extends BaseService {
         return res;
     }
 
+
     public static String updateArticle(String article_title,String article_content,String link_address,String imgId,String article_source,String articalId,HttpServletRequest req){
 
         HttpSession session=req.getSession();
