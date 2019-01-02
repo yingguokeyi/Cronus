@@ -3,7 +3,6 @@
 <%@ include file="/advertising/advertising_memu.jsp"%>
 <link rel="stylesheet" type="text/css" href="${ctx}/common/css/goodsCateSelect.css"/>
 
-
 <script type="text/javascript" src="${ctx}/js/Utils.js?t=1515376178738"></script>
 
 <%
@@ -42,7 +41,7 @@
                     $("#articalId").val(id);
                     $("#articalId").val(id);
                     $("#article_title").val(data.rs[0].article_title);
-                    $("#article_content").val(data.rs[0].article_content);
+//                    $("#article_content").val(data.rs[0].article_content);
                     $("#link_address").val(data.rs[0].link_address);
                     $("#article_source").val(data.rs[0].article_source);
                     imgId =$("#showImgIds").val(data.rs[0].imgId);
@@ -109,7 +108,7 @@
 
     <div class="layui-elem-quote">
             <span>
-                <a>添加文章</a>&nbsp;&nbsp;
+                <a>编辑文章</a>&nbsp;&nbsp;
             </span>
         <button class="layui-btn  layui-btn-sm" style="margin-left: 50%" onclick="history.go(-1)">返回到文章列表</button>
     </div>
@@ -136,15 +135,15 @@
 
         </div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label"><label style="color: red">*</label>文章内容：</label>
-            <div class="layui-input-block" style="width: 70%;">
-                <input style="width: 500px;display: inline-block;" id="article_content" name="article_content"
-                       autocomplete="off"
-                       class="layui-input" type="text" >
-            </div>
+        <%--<div class="layui-form-item">--%>
+            <%--<label class="layui-form-label"><label style="color: red">*</label>文章内容：</label>--%>
+            <%--<div class="layui-input-block" style="width: 70%;">--%>
+                <%--<input style="width: 500px;display: inline-block;" id="article_content" name="article_content"--%>
+                       <%--autocomplete="off"--%>
+                       <%--class="layui-input" type="text" >--%>
+            <%--</div>--%>
 
-        </div>
+        <%--</div>--%>
 
         <div class="layui-form-item">
             <label class="layui-form-label"><label style="color: red">*</label>文章链接：</label>
@@ -208,7 +207,7 @@
         $("#submit").click(function () {
 
             var article_title = $("#article_title").val();
-            var article_content = $("#article_content").val();
+//            var article_content = $("#article_content").val();
             var link_address = $("#link_address").val();
             var article_source = $("#article_source").val();
 
@@ -216,10 +215,10 @@
                 layer.msg('文章内容不能为空！');
                 return false;
             }
-            if (article_content == "") {
-                layer.msg('文章内容不能为空！');
-                return false;
-            }
+//            if (article_content == "") {
+//                layer.msg('文章内容不能为空！');
+//                return false;
+//            }
             if (link_address == "") {
                 layer.msg('链接地址不能为空！');
                 return false;
@@ -237,7 +236,7 @@
                 async: true,
                 data: {
                     'article_title':article_title,
-                    'article_content':article_content,
+//                    'article_content':article_content,
                     'link_address':link_address,
                     'imgId':$("#showImgIds").val(),
                     'article_source':article_source,

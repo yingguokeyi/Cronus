@@ -14,12 +14,12 @@ import javax.servlet.http.HttpSession;
  */
 public class ArticleService extends BaseService {
 
-    public static String getArticleList(int pageI,int limitI,String article_content,String article_source,String status,String start_time,String end_time){
+    public static String getArticleList(int pageI,int limitI,String article_content,String article_source,String status,String start_time,String end_time,String stime,String etime){
         StringBuffer sql = new StringBuffer();
         sql.append(MemberSql.getArticleListPage_sql);
-        if (!"".equals(article_content) && article_content != null){
-            sql.append(" and article_content LIKE '%").append(article_content).append("%'");
-        }
+//        if (!"".equals(article_content) && article_content != null){
+//            sql.append(" and article_content LIKE '%").append(article_content).append("%'");
+//        }
         if (!"".equals(article_source) && article_source != null){
             sql.append(" and article_source LIKE '%").append(article_source).append("%'");
         }
@@ -32,6 +32,12 @@ public class ArticleService extends BaseService {
             System.out.println(bDate);
             sql.append(" and create_time BETWEEN ").append(bDate).append(" and ").append(eDate);
         }
+        if ((stime != null && !"".equals(stime)) || (etime!=null && !"".equals(etime))) {
+            String bDate = Utils.transformToYYMMddHHmmss(stime);
+            String eDate = Utils.transformToYYMMddHHmmss(etime);
+            System.out.println(bDate);
+            sql.append(" and edit_time BETWEEN ").append(bDate).append(" and ").append(eDate);
+        }
         sql.append(" order by create_time desc ");
         int sid = BaseService.sendObjectBase(9997,sql.toString(),pageI,limitI);
         String res = ResultPoor.getResult(sid);
@@ -41,7 +47,7 @@ public class ArticleService extends BaseService {
     public static String addArticle(String article_title,String article_content,String link_address,String imgId,String article_source,HttpServletRequest req){
         String currentTime = BaseCache.getTIME();
 
-        int uid = sendObjectCreate(998,article_title,article_content,link_address,article_source,currentTime,0,imgId);
+        int uid = sendObjectCreate(998,article_title,link_address,article_source,currentTime,0,imgId);
         String res = ResultPoor.getResult(uid);
         return res;
 
@@ -51,7 +57,12 @@ public class ArticleService extends BaseService {
         int uId = UserService.checkUserPwdFirstStep(userId);
         String operator = UserService.selectLoginName(uId);
         String edit_time= BaseCache.getDateTime();
-        int sid = sendObjectCreate(999, status,edit_time,operator,id);
+        String[] ids = id.split(",");
+        int sid = 0;
+        for (String id1 : ids) {
+            sid = sendObjectCreate(999, status,edit_time,operator,id1);
+        }
+//        int sid = sendObjectCreate(999, status,edit_time,operator,id);
         String result = ResultPoor.getResult(sid);
         return result;
     }
@@ -68,7 +79,6 @@ public class ArticleService extends BaseService {
         return res;
     }
 
-
     public static String updateArticle(String article_title,String article_content,String link_address,String imgId,String article_source,String articalId,HttpServletRequest req){
 
         HttpSession session=req.getSession();
@@ -77,10 +87,9 @@ public class ArticleService extends BaseService {
         String operator = UserService.selectLoginName(uId);
         String edit_time= BaseCache.getDateTime();
 
-        int uid = sendObjectCreate(1002,article_title,article_content,link_address,article_source,edit_time,operator,imgId,articalId);
+        int uid = sendObjectCreate(1002,article_title,link_address,article_source,edit_time,operator,imgId,articalId);
         String res = ResultPoor.getResult(uid);
         return res;
-
     }
 
 }

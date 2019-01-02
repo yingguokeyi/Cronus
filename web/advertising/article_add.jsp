@@ -88,15 +88,15 @@
 
         </div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label"><label style="color: red">*</label>文章内容：</label>
-            <div class="layui-input-block" style="width: 70%;">
-                <input style="width: 500px;display: inline-block;" id="article_content" name="article_content"
-                       autocomplete="off"
-                       class="layui-input" type="text" >
-            </div>
+        <%--<div class="layui-form-item">--%>
+            <%--<label class="layui-form-label"><label style="color: red">*</label>文章内容：</label>--%>
+            <%--<div class="layui-input-block" style="width: 70%;">--%>
+                <%--<input style="width: 500px;display: inline-block;" id="article_content" name="article_content"--%>
+                       <%--autocomplete="off"--%>
+                       <%--class="layui-input" type="text" >--%>
+            <%--</div>--%>
 
-        </div>
+        <%--</div>--%>
 
         <div class="layui-form-item">
             <label class="layui-form-label"><label style="color: red">*</label>文章链接：</label>
@@ -162,7 +162,7 @@
 
 
             var article_title = $("#article_title").val();
-            var article_content = $("#article_content").val();
+//            var article_content = $("#article_content").val();
             var link_address = $("#link_address").val();
             var article_source = $("#article_source").val();
             var showImgIds = $("#showImgIds").val();
@@ -171,10 +171,10 @@
                 layer.msg('文章内容不能为空！');
                 return false;
             }
-            if (article_content == "") {
-                layer.msg('文章内容不能为空！');
-                return false;
-            }
+//            if (article_content == "") {
+//                layer.msg('文章内容不能为空！');
+//                return false;
+//            }
             if (link_address == "") {
                 layer.msg('链接地址不能为空！');
                 return false;
@@ -197,7 +197,7 @@
 //                data: {jsonString: JSON.stringify($('form').serializeObject())},
                 data: {
                     'article_title':article_title,
-                    'article_content':article_content,
+//                    'article_content':article_content,
                     'link_address':link_address,
                     'imgId':$("#showImgIds").val(),
                     'article_source':article_source
