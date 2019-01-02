@@ -1,4 +1,4 @@
-﻿package action;
+package action;
 
 import action.service.ArticleService;
 import common.StringHandler;
