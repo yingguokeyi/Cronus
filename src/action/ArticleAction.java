@@ -1,4 +1,4 @@
-﻿package action;
+package action;
 
 import action.service.ArticleService;
 import common.StringHandler;
@@ -15,10 +15,10 @@ import javax.servlet.http.HttpSession;
 public class ArticleAction extends BaseServlet {
 
     //查询文章列表
-    public String getArticleList(String page, String limit,String article_content,String article_source,String status,String start_time,String end_time){
+    public String getArticleList(String page, String limit,String article_content,String article_source,String status,String start_time,String end_time,String stime,String etime){
         int pageI = (page == null ? 1 : Integer.valueOf(page));
         int limitI = (limit == null ? 10 : Integer.valueOf(limit));
-        String articleList = ArticleService.getArticleList((pageI - 1) * limitI, limitI, article_content, article_source,status,start_time,end_time);
+        String articleList = ArticleService.getArticleList((pageI - 1) * limitI, limitI, article_content, article_source,status,start_time,end_time,stime,etime);
         return StringHandler.getRetString(articleList);
     }
 
@@ -48,6 +48,7 @@ public class ArticleAction extends BaseServlet {
         String articleInfo = ArticleService.getArticleInfo(id);
         return StringHandler.getRetString(articleInfo);
     }
+
 
     //修改文章内容
     public String updateArticle(String article_title,String article_content,String link_address,String imgId,String article_source,String articalId,HttpServletRequest req){
